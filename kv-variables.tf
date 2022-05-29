@@ -1,49 +1,38 @@
-# Resource Group variables #
-
-variable "resource_group_name" {
-  type        = string
-  description = "The name of an existing Resource Group"
-}
-
-variable "location" {
-  type        = string
-  description = "Define the region the Azure Key Vault should be created, you should use the Resource Group location"
-}
-
 # Key Vault variables #
 
-variable "name" {
+variable "kv-full-object-id" {
   type        = string
-  description = "The name of the Azure Key Vault"
+  description = "The object ID of a user, service principal or security group in the Azure Active Directory tenant for FULL access to the Azure Key Vault"
+  default     = ""
 }
 
-variable "sku_name" {
+variable "kv-read-object-id" {
   type        = string
-  description = "Select Standard or Premium SKU"
-  default     = "standard"
+  description = "The object ID of a user, service principal or security group in the Azure Active Directory tenant for READ access to the Azure Key Vault"
+  default     = ""
 }
 
-variable "enabled_for_deployment" {
+variable "kv-vm-deployment" {
   type        = string
-  description = "Allow Virtual Machines to retrieve certificates stored as secrets from the Key Vault"
+  description = "Allow Azure Virtual Machines to retrieve certificates stored as secrets from the Azure Key Vault"
   default     = "true"
 }
 
-variable "enabled_for_disk_encryption" {
+variable "kv-disk-encryption" {
   type        = string
-  description = "Allow Azure Disk Encryption to retrieve secrets from the Key Vault and unwrap keys" 
+  description = "Allow Azure Disk Encryption to retrieve secrets from the Azure Key Vault and unwrap keys" 
   default     = "true"
 }
 
-variable "enabled_for_template_deployment" {
+variable "kv-template-deployment" {
   type        = string
-  description = "Allow Azure Resource Manager to retrieve secrets from the Key Vault"
+  description = "Allow Azure Resource Manager to retrieve secrets from the Azure Key Vault"
   default     = "true"
 }
 
 variable "full-key-permissions" {
   type        = list(string)
-  description = "List of full key permissions, must be one or more from the following: backup, create, decrypt, delete, encrypt, get, import, list, purge, recover, restore, sign, unwrapKey, update, verify and wrapKey."
+  description = "List of full key permissions, must be one or more from the following: backup, create, decrypt, delete, encrypt, get, import, list, purge, recover, restore, sign, unwrapKey, update, verify and wrapKey"
   default     = [ "Backup", "Create", "Decrypt", "Delete", "Encrypt", "Get", "Import", "List", "Purge", 
                   "Recover", "Restore", "Sign", "UnwrapKey","Update", "Verify", "WrapKey" ]
 }
@@ -92,29 +81,10 @@ variable "readonly-storage-permissions" {
   default     = [ "Get", "GetSAS", "List", "ListSAS" ]
 }
 
-variable "tags" {
-  description = "A mapping of tags to assign to the resource"
-  type        = map(string)
-  default     = {}
-}
-
-variable "policies" {
-  type = map(object({
-    tenant_id               = string
-    object_id               = string
-    key_permissions         = list(string)
-    secret_permissions      = list(string)
-    certificate_permissions = list(string)
-    storage_permissions     = list(string)
-  }))
-  description = "Define a Key Vault access policy"
-  default = {}
-}
-
-variable "secrets" {
+variable "kv-secrets" {
   type = map(object({
     value = string
   }))
-  description = "Define Key Vault secrets"
-  default = {}
+  description = "Define Azure Key Vault secrets"
+  default     = {}
 }
