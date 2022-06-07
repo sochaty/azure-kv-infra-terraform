@@ -1,0 +1,7 @@
+.terraform/modules/modules.json
+plan.json
+plan.out
+splist.txt
+.terraform/terraform.tfstate
+.terraform/providers/registry.terraform.io/hashicorp/azurerm/3.7.0/linux_amd64/terraform-provider-azurerm_v3.7.0_x5
+.terraform/providers/registry.terraform.io/hashicorp/random/3.2.0/linux_amd64/terraform-provider-random_v3.2.0_x5
